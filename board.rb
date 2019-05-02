@@ -1,12 +1,12 @@
 require_relative "piece"
 
 class Board
-  attr_reader :rows
+  attr_reader :grid
   
   def initialize
-    @rows = Array.new(8) { Array.new(8) }
+    @grid = Array.new(8) { Array.new(8) }
 
-    @rows.each_with_index do |row, i|
+    @grid.each_with_index do |row, i|
       row.each_with_index do |square, j|
         if (2..5).include?(i)
           row[j] = nil
@@ -19,12 +19,12 @@ class Board
 
   def [](pos)
     row, col = pos
-    rows[row][col]
+    grid[row][col]
   end
 
   def []=(pos, val)
     row, col = pos
-    rows[row][col] = val
+    grid[row][col] = val
   end
 
   def move_piece(start_pos, end_pos)
@@ -33,6 +33,12 @@ class Board
 
     self[end_pos] = self[start_pos]
     self[start_pos] = nil
+  end
+
+  def valid_pos?(pos)
+    row, col = pos
+
+    (0..7).include?(row) && (0..7).include?(col)
   end
 end
 
