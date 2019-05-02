@@ -15,14 +15,14 @@ class Display
     chess_board.each_with_index do |row, i|
       print_row = row.map.with_index do |square, j|
         if x == i && y == j
-          "C".colorize(:green)
-        elsif square.nil?
-          "-".colorize(:light_blue)
+          "   ".colorize(:background => :yellow)
+        elsif i.even? && j.even? || i.odd? && j.odd?
+          "   ".colorize(:background => :blue)
         else
-          "X".colorize(:light_magenta)
+          "   ".colorize(:background => :red)
         end
       end
-      puts print_row.join(" ")
+      puts print_row.join
     end
   end
 
@@ -35,6 +35,6 @@ class Display
   end
 end
 
-b = Board.new
-d = Display.new(b)
-d.test_cursor
+# b = Board.new
+# d = Display.new(b)
+# d.test_cursor
